@@ -1,26 +1,29 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import {useEffect, useState, useContext} from "react";
+import {DisplayCell} from "./components/DisplayCell";
+import {LettersDisplay} from "./components/LettersDisplay";
+import {GameBoardContext} from "./context/GameBoardContext";
+import 'bootstrap/dist/css/bootstrap.css'
+import {useGameBoard} from "./hooks/useGameBoard";
+import {KeyboardDisplay} from "./components/KeyboardDisplay";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const gameState = useGameBoard();
+
+  // @ts-ignore
+    return (
+        <>
+            <GameBoardContext.Provider value={useGameBoard()}>
+                <h1>Wordle!</h1>
+                <LettersDisplay/>
+                <KeyboardDisplay/>
+            </GameBoardContext.Provider>
+        </>
+  )
 }
 
 export default App;
