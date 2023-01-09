@@ -1,8 +1,9 @@
 import React, {ReactNode} from "react";
+import backspace from '../graphics/backspace-white.svg';
 
 export const KeyboardDisplay = () => {
 
-    const qwerty = 'qwertyuiopasdfghjklzxcvbnm';
+    const qwerty = 'qwertyuiopasdfghjklzxcvbnm'.toUpperCase();
 
     const qwertyArr = qwerty.split("");
 
@@ -12,19 +13,23 @@ export const KeyboardDisplay = () => {
 
     const thirdRow = qwertyArr.slice(20,);
 
+    const backSpaceImagePath = '../graphics/backspace.svg';
+
     thirdRow.push('backspace');
-    thirdRow.unshift('enter');
+    thirdRow.unshift('Enter');
 
     return(
         <div id={'KeyboardDisplay'}>
-            <div className={'keyboardRow mt-3'}>
-                {firstRow.map((k) => <button className={'btn btn-outline-secondary'} data-key={k}>{k}</button>)}
+            <div className={'keyboardRow mt-5'}>
+                {firstRow.map((k) => <button data-key={k}>{k}</button>)}
             </div>
             <div className={'keyboardRow mt-1'}>
-                {secondRow.map((k) => <button className={'btn btn-outline-secondary'} data-key={k}>{k}</button>)}
+                {secondRow.map((k) => <button data-key={k}>{k}</button>)}
             </div>
             <div className={'keyboardRow mt-1'}>
-                {thirdRow.map((k) => <button className={'btn btn-outline-secondary'} data-key={k}>{k}</button>)}
+                {thirdRow.map((k) => k!=='backspace'
+                    ?<button data-key={k} className={'w-auto'}>{k}</button>
+                    :<button data-key={k} className={'w-10'}><img src={backspace}/></button>)}
             </div>
         </div>
     )

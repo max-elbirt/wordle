@@ -7,8 +7,6 @@ export function useGameBoard() {
 
     const [gameBoard, setGameBoard] = useState(arr);
 
-    const word = 'hello';
-
     return {
         gameBoard,
         setGameBoard,

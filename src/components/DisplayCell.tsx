@@ -1,6 +1,5 @@
 import React, {EventHandler, useContext, useRef} from "react";
 import {GameBoardContext} from "../context/GameBoardContext";
-import {FocusCellContext} from "../context/FocusCellContext";
 import '../styles/styles.css';
 
 interface Props {
@@ -12,12 +11,13 @@ export const DisplayCell: React.FC<Props> = ({rowNum, colNum}) => {
     const gameCtx = useContext(GameBoardContext);
 
     const handleTypingEvent: React.KeyboardEventHandler = (event: any) => {
-        event.target.value = event.key;
+        event.target.value = event.key.toUpperCase();
         const newGameBoard = [...gameCtx.gameBoard,gameCtx.gameBoard[rowNum][colNum] = event.key];
         newGameBoard.pop();
         gameCtx.setGameBoard(newGameBoard);
         console.log(gameCtx.gameBoard);
 
+        event.target.blur();
         const nextInput = event.target.nextElementSibling;
         nextInput.focus();
 

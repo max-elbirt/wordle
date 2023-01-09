@@ -34,6 +34,8 @@ input {
   grid-template-columns: repeat(5, 4em);
   grid-template-rows: repeat(5, 1fr);
   gap: 0.3em;
+  margin-top: 1em;
+  font-size: large;
 }
 
 #KeyboardDisplay {
@@ -51,6 +53,30 @@ div.keyboardRow {
   justify-content: center;
   align-items: center;
   gap: 0.2em;
+}
+div.keyboardRow button {
+  width: 2em;
+  height: fit-content;
+  text-align: center;
+  font-size: x-large;
+  background-color: #A2BFE0;
+  border-radius: 5px;
+  border: 0.5px solid black;
+  padding: 0.5em;
+  color: white;
+}
+div.keyboardRow button:hover {
+  background-color: cornflowerblue;
+}
+div.keyboardRow button:active {
+  transform: scale(0.95);
+  background-color: lightskyblue;
+}
+div.keyboardRow button[data-key=enter] {
+  width: 6.5em;
+}
+div.keyboardRow button[data-key=backspace] {
+  width: 6.5em;
 }
 
 /*# sourceMappingURL=styles.css.map */

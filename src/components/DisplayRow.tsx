@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {DisplayCell} from "./DisplayCell";
-import {FocusCellContext} from "../context/FocusCellContext";
 
 interface Props {
     rowNum: number,
