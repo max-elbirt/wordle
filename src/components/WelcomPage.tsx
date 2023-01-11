@@ -13,28 +13,24 @@ export function WelcomePage() {
     const userCtx = useContext(UserContext);
 
     return (
-        <>
-                <div>
-                    {
-                        userCtx.user
-                        ?
-                        <h1>`Welcome {userCtx.user.userName}`</h1>
-                        :
-                        <>
-                            <h1>`Please log-in!`</h1>
-                            <button onClick={() => modalCtx.setShowLoginModal(true)}>Login</button>
-                            <MyModal title={'Login PopUp'} show={modalCtx.showLoginModal} onClose={() => modalCtx.setShowLoginModal(false)}>
-                                <Form/>
-                            </MyModal>
-                        </>
-                    }
-                </div>
-
-                <Link to={'/game'}>
-                    <button>
-                        play
-                    </button>
-                </Link>
-        </>
+        <div className={'h-100 container d-flex flex-column justify-content-center align-items-center'}>
+            {
+                userCtx.user
+                    ? <h1>Welcome {userCtx.user.userName}</h1>
+                    : <>
+                        <h1>Please log-in!</h1>
+                        <button onClick={() => modalCtx.setShowLoginModal(true)}>Login</button>
+                        <MyModal title={'Login PopUp'} show={modalCtx.showLoginModal}
+                                 onClose={() => modalCtx.setShowLoginModal(false)}>
+                            <Form/>
+                        </MyModal>
+                    </>
+            }
+            <Link to={'/game'}>
+                <button>
+                    play
+                </button>
+            </Link>
+        </div>
     )
 }

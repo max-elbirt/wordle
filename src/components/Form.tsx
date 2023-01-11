@@ -1,5 +1,6 @@
 import React, {FormEvent, FormEventHandler, useContext} from "react";
 import {UserContext} from "../context/UserContext";
+
 export function Form() {
 
     const userCtx = useContext(UserContext);
@@ -14,11 +15,12 @@ export function Form() {
         userCtx.setUser(dataObj);
     }
 
-    return(
-        <form onSubmit={handleSubmit}>
-            <input className={'form-control'} name={'userName'} type={'text'} placeholder={'Enter your user name'}/>
-            <input className={'form-control'} name={'password'} type={'text'} placeholder={'Enter your password'}/>
-            <button type={'submit'}/>
+    return (
+        <form onSubmit={handleSubmit} className={'d-flex flex-column align-items-center justify-content-center'}>
+            <input className={'form-control mt-2'} name={'userName'} type={'text'}
+                   placeholder={'Enter your user name'}/>
+            <input className={'form-control mt-2'} name={'password'} type={'text'} placeholder={'Enter your password'}/>
+            <button className={'mt-2 btn btn-outline-secondary'} type={'submit'}>Submit</button>
         </form>
     )
 }

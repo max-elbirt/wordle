@@ -14,19 +14,19 @@ import {useGameBoard} from "./hooks/useGameBoard";
 function App() {
 
     return (
-        <>
+        <div>
             {/*<UserContext.Provider value={useUserState()}>*/}
             {/*    <GameBoardContext.Provider value={useGameBoard()}>*/}
             {/*        <GameBoard/>*/}
             {/*    </GameBoardContext.Provider>*/}
             {/*</UserContext.Provider>*/}
             <UserContext.Provider value={useUserState()}>
-                    <ModalsContext.Provider value={useModalsState()}>
-                        <WelcomePage/>
-                    </ModalsContext.Provider>
+                <ModalsContext.Provider value={useModalsState()}>
+                    <WelcomePage/>
+                </ModalsContext.Provider>
             </UserContext.Provider>
-        </>
-  )
+        </div>
+    )
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import React, {ReactElement, ReactPropTypes, useContext} from "react";
 import {ModalProps} from "../types/ModalProps";
-import {Modal, ModalDialog, ModalHeader, ModalTitle} from "react-bootstrap";
+import {Modal, ModalBody, ModalDialog, ModalFooter, ModalHeader, ModalTitle} from "react-bootstrap";
 import {ModalsContext} from "../context/ModalsContext";
 
 export const MyModal = ({children, show, onClose, title}: ModalProps) => {
@@ -18,8 +18,12 @@ export const MyModal = ({children, show, onClose, title}: ModalProps) => {
                     <span>{title}</span>
                 </ModalTitle>
             </ModalHeader>
+            <ModalBody>
                 {children}
-                <button onClick={onClose}>Close</button>
+            </ModalBody>
+            <ModalFooter className={'d-flex flex-row justify-content-center'}>
+                <button className={'btn btn-secondary'} onClick={onClose}>Close</button>
+            </ModalFooter>
         </Modal>
     )
 
