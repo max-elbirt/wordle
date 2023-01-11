@@ -7,8 +7,15 @@ export function useGameBoard() {
 
     const [gameBoard, setGameBoard] = useState(arr);
 
+    const [rowFilled, setRowFilled] = useState([] as number[]);
+
+    const word = "MELON";
+
     return {
         gameBoard,
         setGameBoard,
+        word,
+        rowFilled,
+        setRowFilled
     }
 }
