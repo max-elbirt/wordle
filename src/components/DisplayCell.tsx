@@ -3,16 +3,15 @@ import { GameBoardContext } from "../context/GameBoardContext";
 import "../styles/styles.css";
 
 interface Props {
-  rowNum: number,
-  colNum: number,
-  rowFilled: number[],
+  rowNum: number;
+  colNum: number;
+  rowFilled: number[];
 }
 
 export const DisplayCell: React.FC<Props> = ({ rowNum, colNum }: Props) => {
   //these are the component's states
   const [inWordInPlace, setInWordInPlace] = useState(false);
   const [inWordNotInPlace, setInWordNotInPlace] = useState(false);
-  
 
   //this context contains the gameboardHook with the word in play
   const gameCtx = useContext(GameBoardContext);
@@ -28,23 +27,23 @@ export const DisplayCell: React.FC<Props> = ({ rowNum, colNum }: Props) => {
     gameCtx.setGameBoard(newGameBoard);
     console.log(gameCtx.gameBoard);
 
-    //this block deals with moving the focus onKeyDown
+    //this block deals with moving the focus onKeyDown, and eventually tells us if game is over
     event.target.blur();
     const nextInput = event.target.nextElementSibling;
-    nextInput.focus();
+    nextInput ? nextInput.focus() : console.log("game over");
 
     //this conditional checks if event.key(a letter) is in the game-word and in the right position in the gameWord
     if (event.target.value === gameCtx.word[colNum]) {
-        console.log('entered letter in word and in place')
+      console.log("entered letter in word and in place");
       setInWordInPlace(true);
     } else if (gameCtx.word.includes(event.target.value)) {
-        console.log('letter in word');
+      console.log("letter in word");
       setInWordNotInPlace(true);
     }
 
     //this conditional checks if we've reached the end of a row
     if (colNum === 4 && gameCtx.gameBoard[rowNum][4] !== "") {
-        console.log('row entered')
+      console.log("row entered");
       //update the row state so that the display components in this row know they can change colors
       gameCtx.setRowFilled([...gameCtx.rowFilled, rowNum]);
       console.log(gameCtx.rowFilled);
@@ -66,7 +65,8 @@ export const DisplayCell: React.FC<Props> = ({ rowNum, colNum }: Props) => {
           autoFocus={true}
           style={{
             backgroundColor:
-            gameCtx.rowFilled.includes(rowNum) && (inWordInPlace ? "green" : (inWordNotInPlace ? "pink" : "grey")),
+              gameCtx.rowFilled.includes(rowNum) &&
+              (inWordInPlace ? "green" : inWordNotInPlace ? "pink" : "grey"),
           }}
         />
       ) : (
@@ -80,7 +80,8 @@ export const DisplayCell: React.FC<Props> = ({ rowNum, colNum }: Props) => {
           readOnly={true}
           style={{
             backgroundColor:
-              gameCtx.rowFilled.includes(rowNum) && (inWordInPlace ? "green" : (inWordNotInPlace ? "pink" : "grey")),
+              gameCtx.rowFilled.includes(rowNum) &&
+              (inWordInPlace ? "green" : inWordNotInPlace ? "pink" : "grey"),
           }}
         />
       )}
