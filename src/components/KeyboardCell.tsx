@@ -14,11 +14,9 @@ export const KeyboardCell: React.FC<KeyboardCellProps> = ({ valueKey }) => {
     const index = gameCtx.gameBoard.flat().indexOf('');
     const row = Math.trunc(index/5);
     const col = index%5;
-    console.log(row, col);
     const newGameBoard = [...gameCtx.gameBoard,(gameCtx.gameBoard[row][col] = letter)]
     newGameBoard.pop();
     gameCtx.setGameBoard(newGameBoard);
-    console.log(gameCtx.gameBoard);
   }
 
   return (

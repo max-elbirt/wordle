@@ -23,44 +23,26 @@ export const DisplayCell: React.FC<DisplayProps> = ({
   const gameCtx = useContext(GameBoardContext);
 
   useEffect(()=>{
-    console.log('entered use effect')
-    if (gameCtx.gameBoard[rowNum][colNum] === gameCtx.word[colNum]){
+
+    if (gameCtx.gameBoard[rowNum][colNum].toUpperCase() === gameCtx.word[colNum]) {
       setInWordInPlace(true);
-      console.log('changed status', inWordInPlace)
     }
-    else if(gameCtx.word.includes(gameCtx.gameBoard[rowNum][colNum])){
+
+
+    if (gameCtx.word.indexOf(gameCtx.gameBoard[rowNum][colNum].toUpperCase()) !== -1) {
       setInWordNotInPlace(true);
     }
 
-    if (colNum === 4 && gameCtx.gameBoard[rowNum][4] !== "") {
-      console.log("row entered");
-      //update the row state so that the display components in this row know they can change colors
-      gameCtx.setRowFilled([...gameCtx.rowFilled, rowNum]);
-      console.log(gameCtx.rowFilled);
+    else if (gameCtx.word.indexOf(gameCtx.gameBoard[rowNum][colNum].toUpperCase()) === -1) {
+      setInWordNotInPlace(false);
     }
 
+
+    if (colNum === 4 && gameCtx.gameBoard[rowNum][4] !== "") {
+      //update the row state so that the display components in this row know they can change colors
+      gameCtx.setRowFilled([...gameCtx.rowFilled, rowNum]);
+    }
   },[gameCtx.gameBoard])
-
-  const handleChange = (event: any) => {
-    console.log('change entered')
-    console.log('onChange:', event.target.value)
-
-    if (event.target.value === gameCtx.word[colNum]) {
-      console.log("entered letter in word and in place");
-      setInWordInPlace(true);
-    } else if (gameCtx.word.includes(event.target.value)) {
-      console.log("letter in word");
-      setInWordNotInPlace(true);
-    }
-
-    if (colNum === 4 && gameCtx.gameBoard[rowNum][4] !== "") {
-      console.log("row entered");
-      //update the row state so that the display components in this row know they can change colors
-      gameCtx.setRowFilled([...gameCtx.rowFilled, rowNum]);
-      console.log(gameCtx.rowFilled);
-    }
-
-  }
 
   const handleTypingEvent = (event: any) => {
     event.target.value = event.key.toUpperCase();
@@ -80,10 +62,10 @@ export const DisplayCell: React.FC<DisplayProps> = ({
 
     //this conditional checks if event.key(a letter) is in the game-word and in the right position in the gameWord
     if (event.target.value === gameCtx.word[colNum]) {
-      console.log("entered letter in word and in place");
+      console.log("entered letter in word and in place keyboard", inWordInPlace);
       setInWordInPlace(true);
     } else if (gameCtx.word.includes(event.target.value)) {
-      console.log("letter in word");
+      console.log("letter in word keyboard", inWordNotInPlace);
       setInWordNotInPlace(true);
     }
 
@@ -103,15 +85,12 @@ export const DisplayCell: React.FC<DisplayProps> = ({
         <input
           type={"text"}
           onKeyDown={handleTypingEvent as React.KeyboardEventHandler}
-          // defaultValue={''}
-          // value = {gameCtx.gameBoard[rowNum][colNum]}
-          value = {gameCtx.gameBoard[rowNum][colNum]}
+          value = {gameCtx.gameBoard[rowNum][colNum].toUpperCase()}
           data-row={rowNum}
           data-col={colNum}
           maxLength={1}
           readOnly={true}
           autoFocus={true}
-          onInput={handleChange}
           style={{
             backgroundColor:
               gameCtx.rowFilled.includes(rowNum) &&
@@ -122,14 +101,11 @@ export const DisplayCell: React.FC<DisplayProps> = ({
         <input
           type={"text"}
           onKeyDown={handleTypingEvent as React.KeyboardEventHandler}
-          // defaultValue={""}
-          // value = {gameCtx.gameBoard[rowNum][colNum]}
-          value = {gameCtx.gameBoard[rowNum][colNum]}
+          value = {gameCtx.gameBoard[rowNum][colNum].toUpperCase()}
           data-row={rowNum}
           data-col={colNum}
           maxLength={1}
           readOnly={true}
-          onInput={handleChange}
           style={{
             backgroundColor:
               gameCtx.rowFilled.includes(rowNum) &&
