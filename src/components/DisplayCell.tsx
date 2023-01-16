@@ -1,6 +1,12 @@
 import { cp } from "fs";
 import { stringify } from "querystring";
-import React, { EventHandler, useContext, useEffect, useRef, useState } from "react";
+import React, {
+  EventHandler,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { GameBoardContext } from "../context/GameBoardContext";
 import "../styles/styles.css";
 
@@ -22,27 +28,30 @@ export const DisplayCell: React.FC<DisplayProps> = ({
   //this context contains the gameboardHook with the word in play
   const gameCtx = useContext(GameBoardContext);
 
-  useEffect(()=>{
-
-    if (gameCtx.gameBoard[rowNum][colNum].toUpperCase() === gameCtx.word[colNum]) {
+  useEffect(() => {
+    if (
+      gameCtx.gameBoard[rowNum][colNum].toUpperCase() === gameCtx.word[colNum]
+    ) {
       setInWordInPlace(true);
     }
 
-
-    if (gameCtx.word.indexOf(gameCtx.gameBoard[rowNum][colNum].toUpperCase()) !== -1) {
+    if (
+      gameCtx.word.indexOf(gameCtx.gameBoard[rowNum][colNum].toUpperCase()) !==
+      -1
+    ) {
       setInWordNotInPlace(true);
-    }
-
-    else if (gameCtx.word.indexOf(gameCtx.gameBoard[rowNum][colNum].toUpperCase()) === -1) {
+    } else if (
+      gameCtx.word.indexOf(gameCtx.gameBoard[rowNum][colNum].toUpperCase()) ===
+      -1
+    ) {
       setInWordNotInPlace(false);
     }
-
 
     if (colNum === 4 && gameCtx.gameBoard[rowNum][4] !== "") {
       //update the row state so that the display components in this row know they can change colors
       gameCtx.setRowFilled([...gameCtx.rowFilled, rowNum]);
     }
-  },[gameCtx.gameBoard])
+  }, [gameCtx.gameBoard]);
 
   const handleTypingEvent = (event: any) => {
     event.target.value = event.key.toUpperCase();
@@ -62,19 +71,15 @@ export const DisplayCell: React.FC<DisplayProps> = ({
 
     //this conditional checks if event.key(a letter) is in the game-word and in the right position in the gameWord
     if (event.target.value === gameCtx.word[colNum]) {
-      console.log("entered letter in word and in place keyboard", inWordInPlace);
       setInWordInPlace(true);
     } else if (gameCtx.word.includes(event.target.value)) {
-      console.log("letter in word keyboard", inWordNotInPlace);
       setInWordNotInPlace(true);
     }
 
     //this conditional checks if we've reached the end of a row
     if (colNum === 4 && gameCtx.gameBoard[rowNum][4] !== "") {
-      console.log("row entered");
       //update the row state so that the display components in this row know they can change colors
       gameCtx.setRowFilled([...gameCtx.rowFilled, rowNum]);
-      console.log(gameCtx.rowFilled);
     }
   };
 
@@ -85,7 +90,7 @@ export const DisplayCell: React.FC<DisplayProps> = ({
         <input
           type={"text"}
           onKeyDown={handleTypingEvent as React.KeyboardEventHandler}
-          value = {gameCtx.gameBoard[rowNum][colNum].toUpperCase()}
+          value={gameCtx.gameBoard[rowNum][colNum].toUpperCase()}
           data-row={rowNum}
           data-col={colNum}
           maxLength={1}
@@ -101,7 +106,7 @@ export const DisplayCell: React.FC<DisplayProps> = ({
         <input
           type={"text"}
           onKeyDown={handleTypingEvent as React.KeyboardEventHandler}
-          value = {gameCtx.gameBoard[rowNum][colNum].toUpperCase()}
+          value={gameCtx.gameBoard[rowNum][colNum].toUpperCase()}
           data-row={rowNum}
           data-col={colNum}
           maxLength={1}

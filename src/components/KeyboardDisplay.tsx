@@ -19,19 +19,6 @@ export const KeyboardDisplay = () => {
   thirdRow.unshift("Enter");
 
   return (
-    // <div id={'KeyboardDisplay'}>
-    //     <div className={'keyboardRow mt-5'}>
-    //         {firstRow.map((k) => <button data-key={k}>{k}</button>)}
-    //     </div>
-    //     <div className={'keyboardRow mt-1'}>
-    //         {secondRow.map((k) => <button data-key={k}>{k}</button>)}
-    //     </div>
-    //     <div className={'keyboardRow mt-1'}>
-    //         {thirdRow.map((k) => k!=='backspace'
-    //             ?<button data-key={k} className={'w-auto'}>{k}</button>
-    //             :<button data-key={k} className={'w-10'}><img src={backspace}/></button>)}
-    //     </div>
-    // </div>
     <div id={"KeyboardDisplay"}>
       <>
         <div className="mt-5">
