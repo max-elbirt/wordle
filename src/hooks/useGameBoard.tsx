@@ -1,3 +1,4 @@
+import { stringify } from "querystring";
 import React, {useState} from "react";
 
 export function useGameBoard() {
@@ -9,6 +10,8 @@ export function useGameBoard() {
 
     const [rowFilled, setRowFilled] = useState([] as number[]);
 
+    const [clickedValue, setClickedValue] = useState({value: '', clicked: false});
+
     const word = "MELON";
 
     return {
@@ -16,6 +19,8 @@ export function useGameBoard() {
         setGameBoard,
         word,
         rowFilled,
-        setRowFilled
+        setRowFilled,
+        clickedValue,
+        setClickedValue
     }
 }

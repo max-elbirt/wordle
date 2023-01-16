@@ -3,6 +3,8 @@ import {LettersDisplay} from "./LettersDisplay";
 import {KeyboardDisplay} from "./KeyboardDisplay";
 import {GameBoardContext} from "../context/GameBoardContext";
 import {useGameBoard} from "../hooks/useGameBoard";
+import { DisplayCellContext } from "../context/DisplayCellContext";
+import { DisplayCell } from "./DisplayCell";
 
 export function GameBoard() {
 
