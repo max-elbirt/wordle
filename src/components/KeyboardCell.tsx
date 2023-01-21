@@ -13,18 +13,15 @@ export const KeyboardCell: React.FC<KeyboardCellProps> = ({ valueKey }) => {
 
   //this context contains the gameboardHook with the word in play
   const gameCtx = useContext(GameBoardContext);
-
   const index = gameCtx.gameBoard.flat().indexOf("") - 1;
   const row = Math.trunc(index / 5);
+  const col = index % 5;
 
   useEffect(() => {
-    const index = gameCtx.gameBoard.flat().indexOf("") - 1;
-    const row = Math.trunc(index / 5);
-    const col = index % 5;
 
     if (
       valueKey.toUpperCase() === gameCtx.word[col] &&
-      gameCtx.gameBoard.flat().join("").includes(valueKey)
+      gameCtx.gameBoard[row][col] === valueKey
     ) {
       setInWordInPlace(true);
     }
@@ -33,10 +30,6 @@ export const KeyboardCell: React.FC<KeyboardCellProps> = ({ valueKey }) => {
       setInWordNotInPlace(true);
     } else if (gameCtx.word.indexOf(valueKey.toUpperCase()) === -1) {
       setInWordNotInPlace(false);
-    }
-
-    if (col === 4 && gameCtx.gameBoard[row][4] !== "") {
-      gameCtx.setRowFilled([...gameCtx.rowFilled, row]);
     }
   }, [gameCtx.gameBoard]);
 
@@ -54,33 +47,33 @@ export const KeyboardCell: React.FC<KeyboardCellProps> = ({ valueKey }) => {
     gameCtx.setGameBoard(newGameBoard);
   };
 
+  const classNameForLetterResultsWidthAuto = `w-auto ${
+    gameCtx.rowFilled.includes(row) &&
+    gameCtx.gameBoard[row].join("").includes(valueKey) &&
+    (inWordInPlace ? "green" : inWordNotInPlace ? "pink" : "grey")
+  }`;
+
+  const classNameForLetterResultWithTen = `w-10 ${
+    gameCtx.rowFilled.includes(row) &&
+    gameCtx.gameBoard[row].join("").includes(valueKey) &&
+    (inWordInPlace ? "green" : inWordNotInPlace ? "pink" : "grey")
+  }`;
+
   return (
     <>
       {valueKey !== "backspace" && valueKey !== "Enter" ? (
         <button
-          className="w-10"
+          className={classNameForLetterResultWithTen}
           value={valueKey}
           onClick={handleOnClick}
-          style={{
-            backgroundColor:
-              gameCtx.rowFilled.includes(row) &&
-              gameCtx.gameBoard[row].join("").includes(valueKey) &&
-              (inWordInPlace ? "green" : inWordNotInPlace ? "pink" : "grey"),
-          }}
         >
           {valueKey}
         </button>
       ) : (
         <button
-          className="w-auto"
+          className={classNameForLetterResultsWidthAuto}
           value={valueKey}
           onClick={handleOnClick}
-          style={{
-            backgroundColor:
-              gameCtx.rowFilled.includes(row) &&
-              gameCtx.gameBoard[row].join("").includes(valueKey) &&
-              (inWordInPlace ? "green" : inWordNotInPlace ? "pink" : "grey"),
-          }}
         >
           {valueKey}
         </button>

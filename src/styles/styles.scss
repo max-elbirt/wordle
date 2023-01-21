@@ -85,12 +85,16 @@ div.keyboardRow {
 
   }
 
-  button[data-key='enter'] {
-    width: 6.5em;
+  button.green {
+    background-color: green;
   }
 
-  button[data-key='backspace'] {
-    width: 6.5em;
+  button.pink {
+    background-color: pink;
+  }
+
+  button.grey {
+    background-color: grey;
   }
 }
 
