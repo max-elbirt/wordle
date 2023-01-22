@@ -6,9 +6,6 @@ import {useUserState} from "./hooks/useUserState";
 import {WelcomePage} from "./components/WelcomPage";
 import {ModalsContext} from "./context/ModalsContext";
 import {useModalsState} from "./hooks/useModalsState";
-import {createBrowserRouter} from "react-router-dom";
-import {GameBoardContext} from "./context/GameBoardContext";
-import {useGameBoard} from "./hooks/useGameBoard";
 
 
 function App() {
@@ -28,5 +25,4 @@ function App() {
         </div>
     )
 }
-
 export default App;

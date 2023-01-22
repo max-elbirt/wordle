@@ -6,12 +6,10 @@ export function Form() {
     const userCtx = useContext(UserContext);
 
     const handleSubmit: FormEventHandler = (event: FormEvent) => {
-        console.log('form submitted', userCtx.user);
         event.preventDefault();
         const form = event.currentTarget as HTMLFormElement;
         const data = new FormData(form);
         const dataObj = Object.fromEntries(data);
-        console.log(dataObj);
         userCtx.setUser(dataObj);
     }
 
